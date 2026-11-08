@@ -1,0 +1,112 @@
+@keyframes blink-warning {
+  70% {
+    color: #ffffff;
+  }
+
+  to {
+    color: #ffffff;
+    background-color: #d08700;
+  }
+}
+
+@keyframes blink-critical {
+  70% {
+    color: #ffffff;
+  }
+
+  to {
+    color: #ffffff;
+    background-color: #bf616a;
+  }
+}
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 15px;
+  min-height: 0;
+}
+
+#waybar {
+  background-color: rgba(50, 50, 50, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 0 8px;
+}
+
+#battery,
+#clock,
+#cpu,
+#memory,
+#network,
+#temperature,
+#tray {
+  padding: 0 8px;
+}
+
+#battery {
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+#battery.warning,
+#cpu.warning,
+#memory.warning {
+  color: #d08700;
+}
+
+#battery.critical,
+#cpu.critical,
+#temperature.critical {
+  color: #bf616a;
+}
+
+#battery.warning.discharging {
+  animation-name: blink-warning;
+  animation-duration: 3s;
+}
+
+#battery.critical.discharging,
+#memory.critical {
+  animation-name: blink-critical;
+  animation-duration: 2s;
+}
+
+#clock {
+  font-weight: bold;
+}
+
+#memory {
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+#network.disconnected {
+  color: #d08700;
+}
+
+#window {
+  font-weight: bold;
+}
+
+#workspaces button {
+  border-bottom: 2px solid transparent;
+  border-radius: 4px;
+  color: #bcbcbc;
+  padding: 2px 8px;
+}
+
+#workspaces button.focused {
+  background-color: #285577;
+  border-color: #87afd7;
+  color: #ffffff;
+}
+
+#workspaces button.urgent {
+  background-color: #bf616a;
+  border-color: #bf616a;
+  color: #ffffff;
+}

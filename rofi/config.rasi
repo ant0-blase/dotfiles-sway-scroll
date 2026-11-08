@@ -1,0 +1,6 @@
+
+@theme "themes/grey-white.rasi"
+
+configuration {
+    font: "JetBrainsMono Nerd Font Bold 17";
+}

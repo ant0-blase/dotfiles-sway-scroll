@@ -1,0 +1,167 @@
+set $mod Mod4
+set $term alacritty
+set $menu rofi -show drun
+set $file pcmanfm
+set $browser firefox
+
+# Window appearance
+default_border pixel 1
+default_floating_border pixel 1
+default_decoration border_radius 8 shadow true shadow_dynamic true shadow_size 20 shadow_blur 8 shadow_offset 0 4 shadow_color #00000050
+client.focused          #ffffff66 #ffffff66 #ffffff66 #ffffff66 #ffffff66
+client.focused_inactive #ffffff66 #ffffff66 #ffffff66 #ffffff66 #ffffff66
+client.unfocused        #ffffff66 #ffffff66 #ffffff66 #ffffff66 #ffffff66
+client.urgent           #ffffff66 #ffffff66 #ffffff66 #ffffff66 #ffffff66
+gaps inner 5
+gaps outer 20
+focus_follows_mouse yes
+floating_modifier $mod normal
+
+# Input
+seat seat0 xcursor_theme Adwaita 24
+
+input type:keyboard {
+    xkb_layout fr
+    repeat_delay 300
+    repeat_rate 50
+}
+
+input type:touchpad {
+    natural_scroll enabled
+    tap enabled
+    dwt enabled
+    scroll_factor 1.0
+    accel_profile adaptive
+    pointer_accel 0.7
+    click_method clickfinger
+    tap_button_map lrm
+    middle_emulation disabled
+}
+
+input type:pointer {
+    accel_profile adaptive
+    pointer_accel 0.7
+}
+
+# Animations
+animations {
+    enabled yes
+    default yes 150 var 3 [ 0.215 0.61 0.355 1 ]
+    window_open yes 150 var 3 [ 0 0 1 1 ]
+    window_move yes 150 var 3 [ 0.215 0.61 0.355 1 ] off 0.05 6 [ 0 0.6 0.4 0 1 0 0.4 -0.6 1 -0.6 ]
+    window_size yes 150 var 3 [ -0.35 0 0 0.5 ]
+    workspace_switch yes 250 var simple [ 0.215 0.61 0.355 1 ]
+    window_fullscreen yes 250 var simple [ 0.3 0.5 0.4 1 ]
+    fade_in yes 150 var simple [ 0.32 0 0.67 0 ]
+    fade_out yes 150 var simple [ 0.33 1 0.68 0 ]
+}
+
+# Layout
+layout_default_width 0.8
+layout_default_height 1.0
+layout_widths [ 0.33333333 0.5 0.66666667 1.0 ]
+layout_heights [ 0.33333333 0.5 0.66666667 1.0 ]
+layout_default_mode h reorder_auto focus after
+
+# Startup applications
+exec_always --no-startup-id sh -c 'swaybg -i "${XDG_CONFIG_HOME:-$HOME/.config}/scroll/wallpaper/wallflower.png" -m fill'
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec_always --no-startup-id waybar
+exec --no-startup-id mako
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Applications
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+e exec $file
+bindsym $mod+b exec $browser
+bindsym $mod+v exec virt-manager
+bindsym $mod+c exec code
+bindsym $mod+l exec swaylock -f -c 000000
+
+# Window management
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+space floating toggle
+bindsym Mod1+Tab focus next
+bindsym Mod1+Shift+Tab focus prev
+
+# Screenshots and recordings
+bindsym --no-warn Print exec sh -c 'video_dir="$(xdg-user-dir VIDEOS)"; mkdir -p "$video_dir"; exec wf-recorder -f "$video_dir/recording_$(date +%F_%H-%M-%S).mp4"'
+bindsym --no-warn Shift+Print exec sh -c 'video_dir="$(xdg-user-dir VIDEOS)"; mkdir -p "$video_dir"; exec wf-recorder -g "$(slurp)" -f "$video_dir/recording_$(date +%F_%H-%M-%S).mp4"'
+bindsym --no-warn Ctrl+Mod1+Print exec killall -s SIGINT wf-recorder
+bindsym $mod+s exec sh -c 'picture_dir="$(xdg-user-dir PICTURES)"; mkdir -p "$picture_dir"; file="$picture_dir/screenshot-$(date +%F-%H%M%S).png"; grim -g "$(slurp)" "$file" && wl-copy < "$file"'
+
+# Navigation
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Resize mode
+mode "resize" {
+    bindsym h resize shrink width 10 px
+    bindsym l resize grow width 10 px
+    bindsym k resize shrink height 10 px
+    bindsym j resize grow height 10 px
+    bindsym Left resize shrink width 10 px
+    bindsym Right resize grow width 10 px
+    bindsym Up resize shrink height 10 px
+    bindsym Down resize grow height 10 px
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+
+# Scratchpad
+bindsym $mod+grave scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+
+# Media and brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Session
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+q exec scrollmsg exit
+
+xwayland enable

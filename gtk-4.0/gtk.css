@@ -1,0 +1,53 @@
+* {
+  color: #ffffff;
+  outline-color: rgba(255, 255, 255, 0.3);
+}
+
+window,
+.background {
+  color: #ffffff;
+  background-color: rgba(50, 50, 50, 0.4);
+}
+
+headerbar {
+  color: #ffffff;
+  background-color: rgba(50, 50, 50, 0.7);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+.view {
+  color: #ffffff;
+  background-color: rgba(50, 50, 50, 0.4);
+}
+
+.sidebar,
+.sidebar.view {
+  color: #eeeeee;
+  background-color: rgba(40, 40, 40, 0.6);
+}
+
+.view:selected {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+button {
+  color: #ffffff;
+  background-color: rgba(59, 59, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+entry {
+  color: #ffffff;
+  background-color: rgba(59, 59, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+scrollbar slider {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
