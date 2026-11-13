@@ -66,7 +66,7 @@ When Scroll is missing, `sway-scroll-git` is built from the AUR and requires `ya
 
 ## Notes
 
-- Alacritty, Rofi, and Waybar use JetBrainsMono Nerd Font. The package is installed by the script.
+- Alacritty and Rofi use JetBrainsMono Nerd Font, which also provides the Waybar icons. The package is installed by the script.
 - Scroll uses the preferred display mode, a French keyboard layout, and the wallpaper in `scroll/wallpaper/`. Change `xkb_layout` in `scroll/config` to use another layout.
 - Screenshots and recordings go to the XDG Pictures and Videos folders. `xdg-user-dirs` is installed if needed.
 - The network and Bluetooth applets need their system services. Enable NetworkManager or Bluetooth only if you use them; the installer does not change service state.
